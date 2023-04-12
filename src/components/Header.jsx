@@ -1,8 +1,8 @@
 export default function Header() {
   return (
-    <div>
-      <div className="flex justify-between w-full p-4 text-xs items-center drop-shadow-lg">
-        <div className="ml-8 flex items-center">
+    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="flex justify-between text-xs items-center sm:mx-4 h-12">
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -21,7 +21,7 @@ export default function Header() {
           <p className="ml-2">info@1xtipster.com</p>
         </div>
 
-        <div className="mr-8">
+        <div className="">
           <a className="bg-teal-600 px-3 cursor-pointer py-2 rounded-lg">
             Join telegram
           </a>
