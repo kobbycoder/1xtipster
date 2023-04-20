@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between text-xs items-center sm:mx-4 h-12">
         <div className="flex items-center">
           <svg
@@ -22,7 +22,11 @@ export default function Header() {
         </div>
 
         <div className="">
-          <a className="bg-teal-600 px-3 cursor-pointer py-2 rounded-lg">
+          <a
+            href="https://t.me/onextipstar"
+            target="_blank"
+            className="bg-teal-600 px-3 cursor-pointer py-2 rounded-lg"
+          >
             Join telegram
           </a>
         </div>

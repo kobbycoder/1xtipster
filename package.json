@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && next proxy",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "proxy": "node src/app/api/v1/route.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "autoprefixer": "10.4.14",
+    "daisyui": "^2.51.5",
+    "dayjs": "^1.11.7",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "firebase": "^9.19.1",
+    "http-proxy-middleware": "^2.0.6",
     "next": "13.3.0",
     "postcss": "8.4.21",
     "react": "18.2.0",

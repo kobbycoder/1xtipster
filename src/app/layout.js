@@ -1,5 +1,7 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 import "./globals.css";
 
 export const metadata = {
@@ -12,14 +14,18 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {/* Header */}
-          <Header />
+        <Header />
         {/* Navbar */}
-          <Navbar />
+        <Navbar />
+
         {/* Hero */}
+        <Hero />
 
         {children}
-        
-        </body>
+
+        {/* Footer */}
+        <Footer />
+      </body>
     </html>
   );
 }

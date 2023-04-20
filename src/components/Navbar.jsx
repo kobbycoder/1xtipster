@@ -1,12 +1,15 @@
 "use client"
+import Image from "next/image";
+import logo from '../assets/logo.png'
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, GiftIcon } from "@heroicons/react/24/outline";
+import { useSelectedLayoutSegment } from "next/navigation"
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Predictions", href: "/predictions", current: false },
-  { name: "Analysis", href: "/analysis", current: false },
-  { name: "Free Bets", href: "/free.bets", current: false },
+  { name: "Home", href: "/", targetSegment: null },
+  { name: "Predictions", href: "/predictions", targetSegment: 'predictions' },
+  { name: "Analysis", href: "/analysis", targetSegment: 'analysis' },
+  { name: "Free Bets", href: "/free.bets", targetSegment: 'free.bets', icon: <GiftIcon className="block h-6 w-6 mr-2" aria-hidden="true" /> },
 ];
 
 function classNames(...classes) {
@@ -14,6 +17,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const activeSegment = useSelectedLayoutSegment();
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -33,15 +38,21 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-end sm:items-stretch pr-8 sm:pr-0 sm:justify-between sm:mx-4">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                  <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src={logo}
                     alt="Your Company"
+                    width={1000}
+                    height={50}
+                    priority
                   />
-                  <img
+                  <Image
                     className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src={logo}
                     alt="Your Company"
+                    width={1000}
+                    height={50}
+                    priority
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -51,13 +62,14 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
+                          activeSegment === item.targetSegment 
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                          "rounded-md px-3 py-2 text-sm font-medium flex items-center"
                         )}
                         aria-current={item.current ? "page" : undefined}
-                      >
+                      > 
+                        {item.icon ? item.icon : ''}
                         {item.name}
                       </a>
                     ))}

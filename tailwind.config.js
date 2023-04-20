@@ -12,7 +12,15 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        spin: {
+          to: { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        spin: 'spin 2s linear infinite',
+      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
