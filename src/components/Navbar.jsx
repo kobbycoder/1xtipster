@@ -1,15 +1,16 @@
 "use client"
 import Image from "next/image";
 import logo from '../assets/logo.png'
+import crown from '../assets/crown.svg'
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, GiftIcon } from "@heroicons/react/24/outline";
 import { useSelectedLayoutSegment } from "next/navigation"
 
 const navigation = [
-  { name: "Home", href: "/", targetSegment: null },
-  { name: "Predictions", href: "/predictions", targetSegment: 'predictions' },
-  { name: "Analysis", href: "/analysis", targetSegment: 'analysis' },
-  { name: "Free Bets", href: "/free.bets", targetSegment: 'free.bets', icon: <GiftIcon className="block h-6 w-6 mr-2" aria-hidden="true" /> },
+  { name: "Home 🏠", href: "/", targetSegment: null },
+  { name: "Fixtures ⚽", href: "/fixtures", targetSegment: 'fixtures' },
+  { name: "Analysis 📊", href: "/analysis", targetSegment: 'analysis' },
+  { name: "VIP", href: "/vip", targetSegment: 'vip', icon: <Image className="block h-6 w-6 mr-2" src={crown} width={1000} height={50} alt='crown' /> },
 ];
 
 function classNames(...classes) {
@@ -64,7 +65,7 @@ export default function Navbar() {
                         className={classNames(
                           activeSegment === item.targetSegment 
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-400 hover:bg-gray-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium flex items-center"
                         )}
                         aria-current={item.current ? "page" : undefined}

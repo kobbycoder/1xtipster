@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
+import { isValid } from "date-fns";
 import TipsDialog from "./TipsDialog";
 import Image from "next/image";
 
@@ -8,40 +9,69 @@ export default function MatchesComponent({ date, id }) {
   const [awayTeamPercentage, setAwayTeamPercentage] = useState("");
   const [homeTeamPercentage, setHomeTeamPercentage] = useState("");
   const [drawPercentage, setDrawPercentage] = useState("");
+  const [homeTip, setHomeTip] = useState("");
+  const [awayTip, setAwayTip] = useState("");
+  const [leagueName, setLeagueName] = useState("");
   let [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    fetchData();
+    fetchData(date);
   }, [date]);
 
-  const fetchData = async () => {
-    const response = await fetch(`/api/predictions?date=${date}`);
-    const data = await response.json();
-    const targetObject = data.find((obj) => obj.id === parseInt(id));
-    setData(targetObject.matches);
+  const fetchData = async (date) => {
+    const newDate = new Date(date);
+    if (isValid(newDate)) {
+      const formattedDate = new Intl.DateTimeFormat("en-US").format(newDate);
+      const response = await fetch(`/api/predictions?date=${formattedDate}`);
+      const data = await response.json();
+      const targetObject = data.find((obj) => obj.id === parseInt(id));
+      setLeagueName(targetObject.name);
+      setData(targetObject.matches);
+    } else {
+      console.log("Invalid date");
+    }
   };
 
+  function addOrdinalSuffix(number) {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const value = number % 100;
+    const suffix =
+      suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
+    return `${number}${suffix}`;
+  }
+
   const getProperDate = (dateStr) => {
-    const date = new Date(dateStr);
+    const date = new Date(dateStr.replace(" ", "T"));
 
     const options = {
       year: "numeric",
       month: "long",
       day: "numeric",
       hour: "numeric",
+      minute: "numeric",
       hour12: true,
     };
 
-    const formatter = new Intl.DateTimeFormat("en-US", options);
-    const formattedDate = formatter.format(date);
+    const day = addOrdinalSuffix(date.getDate());
+    const formattedDate = date
+      .toLocaleString("en-US", options)
+      .replace(/(\d+)(?!<sup>\d+<\/sup>)(?=\S*$)/g, day);
 
     return formattedDate;
   };
 
-  const openTipsDialog = (awayteam, hometeam, draw) => {
+  const openTipsDialog = (
+    awayteam,
+    hometeam,
+    draw,
+    homeGoalTip,
+    awayGoalTip
+  ) => {
     setAwayTeamPercentage(awayteam);
     setHomeTeamPercentage(hometeam);
     setDrawPercentage(draw);
+    setHomeTip(homeGoalTip);
+    setAwayTip(awayGoalTip);
     setIsOpen(true);
   };
 
@@ -54,6 +84,7 @@ export default function MatchesComponent({ date, id }) {
       <div className="rounded-xl w-full max-h-screen overflow-scroll mt-5 bg-gray-800">
         <div className="px-4 py-2">
           <h1 className="font-bold text-gray-300">Matches</h1>
+          <h1 className="font-bold text-xs text-gray-400 mt-1">{leagueName}</h1>
         </div>
         {data ? (
           <div className="flex flex-col space-y-4 p-2">
@@ -81,7 +112,7 @@ export default function MatchesComponent({ date, id }) {
 
                     <div className="flex flex-col justify-center text-center w-1/3 space-y-4 items-center">
                       <h1 className="text-xs text-gray-200 font-bold">
-                       Tip: {res.tip}
+                        Tip: {res.tip}
                       </h1>
                       <h1 className="text-xs text-gray-300">
                         {getProperDate(res.start_date)}
@@ -92,8 +123,8 @@ export default function MatchesComponent({ date, id }) {
                             res.away_win_percentage,
                             res.home_win_percentage,
                             res.draw_percentage,
-                            home_goals_tip,
-                            away_goals_tip
+                            res.home_goals_tip,
+                            res.away_goals_tip
                           )
                         }
                         className="bg-teal-600 text-xs px-2 cursor-pointer py-1 rounded-lg"
@@ -140,6 +171,8 @@ export default function MatchesComponent({ date, id }) {
         awayPercent={awayTeamPercentage}
         homePercent={homeTeamPercentage}
         drawPercent={drawPercentage}
+        homeTip={homeTip}
+        awayTip={awayTip}
       />
     </>
   );

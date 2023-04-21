@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { startOfToday, subDays, addDays, format } from 'date-fns';
 import Image from "next/image";
-import dayjs from "dayjs";
 import Link from "next/link";
 
 export default function Tabs() {
   const [currentTab, setCurrentTab] = useState("Today");
 
-  const today = dayjs().format("YYYY-MM-DD");
-  const yesterday = dayjs().subtract(1, "day").format("YYYY-MM-DD");
-  const tomorrow = dayjs().add(1, "day").format("YYYY-MM-DD");
+  const today = startOfToday();
+  const yesterday = subDays(today, 1);
+  const tomorrow = addDays(today, 1);
+  
+  const formattedToday = format(today, 'yyyy-MM-dd');
+  const formattedYesterday = format(yesterday, 'yyyy-MM-dd');
+  const formattedTomorrow = format(tomorrow, 'yyyy-MM-dd');
 
   const tabs = [
-    { name: "Today", date: today },
-    { name: "Yesterday", date: yesterday },
-    { name: "Tomorrow", date: tomorrow },
+    { name: "Today", date: formattedToday },
+    { name: "Yesterday", date: formattedYesterday },
+    { name: "Tomorrow", date: formattedTomorrow },
   ];
 
   const handleTabChange = (tabName) => {

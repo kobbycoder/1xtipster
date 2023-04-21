@@ -1,11 +1,8 @@
 import React from "react";
 import AffiliateAdPlacement from "@/components/AffiliateAdPlacement";
-import MatchesComponent from "@/components/MatchesComponent";
+import FixturesComponent from "@/components/FixturesComponent";
 
-export default function page({ params }) {
-  const date = params.slug[0];
-  const id = params.slug[1];
-
+export default function page() {
   return (
     <div className="flex w-full min-h-screen justify-between">
       <div className="hidden lg:flex w-2/6">
@@ -13,7 +10,7 @@ export default function page({ params }) {
       </div>
 
       <div className="w-full p-6 lg:p-0 lg:pt-6 md:pt-6">
-        <MatchesComponent date={date} id={id} />
+        <FixturesComponent />
       </div>
 
       <div className="hidden lg:flex w-2/6">

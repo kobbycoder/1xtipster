@@ -9,6 +9,8 @@ export default function TipsDialog({
   awayPercent,
   homePercent,
   drawPercent,
+  homeTip,
+  awayTip
 }) {
   return (
     <Transition appear show={open} as={Fragment}>
@@ -101,7 +103,7 @@ export default function TipsDialog({
 
                 <div className="flex flex-col w-full justify-center text-center mt-5 ">
                   <h1 className="text-gray-500">Correct score</h1>
-                  <h1 className="text-gray-400 font-bold">3 : 0</h1>
+                  <h1 className="text-gray-400 font-bold">{homeTip} : {awayTip}</h1>
                 </div>
 
                 <div className="mt-8 flex justify-center">
@@ -109,7 +111,7 @@ export default function TipsDialog({
                     href="https://affpa.top/L?tag=d_2252447m_97c_&site=2252447&ad=97"
                     target="_blank"
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center text-blue-900 rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium hover:bg-blue-200 dark:text-white dark:bg-teal-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   >
                     Bet Now ⚽
                   </a>

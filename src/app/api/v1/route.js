@@ -7,10 +7,16 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const apiProxy = createProxyMiddleware('/api', {
+const apiProxyProbet = createProxyMiddleware('/api', {
   target: 'https://probet.tips',
   changeOrigin: true,
   pathRewrite: { '^/api': '/api' },
+});
+
+const apiProxyHoloduke = createProxyMiddleware('/api2', {
+  target: 'https://static.holoduke.nl',
+  changeOrigin: true,
+  pathRewrite: { '^/api2': '/footapi' },
 });
 
 app.prepare().then(() => {
@@ -19,7 +25,11 @@ app.prepare().then(() => {
     const { pathname, query } = parsedUrl;
 
     if (pathname.startsWith('/api')) {
-      apiProxy(req, res);
+      if (pathname.startsWith('/api2')) {
+        apiProxyHoloduke(req, res);
+      } else {
+        apiProxyProbet(req, res);
+      }
     } else {
       handle(req, res, parsedUrl);
     }
