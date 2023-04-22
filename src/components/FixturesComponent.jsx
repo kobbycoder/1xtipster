@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
+import live from "../assets/live.svg";
 import React, { useState, useEffect } from "react";
+
 import { isValid } from "date-fns";
 
 export default function FixturesComponent() {
@@ -39,21 +41,20 @@ export default function FixturesComponent() {
     setData([...items]);
   };
 
-// Function to get the ordinal suffix of a number
-function getOrdinalSuffix(number) {
-  const suffixes = ["th", "st", "nd", "rd"];
-  const v = number % 100;
-  return suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
-}
-
+  // Function to get the ordinal suffix of a number
+  function getOrdinalSuffix(number) {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const v = number % 100;
+    return suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
+  }
 
   const getProperDate = () => {
     const date = new Date();
 
     const day = date.getDate();
-    const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date);
+    const month = new Intl.DateTimeFormat("en", { month: "long" }).format(date);
     const year = date.getFullYear();
-    
+
     const formattedDate = `${day}${getOrdinalSuffix(day)} ${month}, ${year}`;
     return formattedDate;
   };
@@ -62,8 +63,27 @@ function getOrdinalSuffix(number) {
     <>
       <div className="rounded-xl w-full bg-gray-800">
         <div className="px-4 py-2 flex justify-between items-center">
-          <h1 className="font-bold text-gray-300">Fixtures ⚽</h1>
-          <h1 className="font-bold text-xs text-gray-300">{getProperDate()} 🔥</h1>
+          <div className="flex flex-col md:space-x-1 md:flex-row">
+            <h1 className="font-bold text-xs text-gray-300">Fixtures ⚽</h1>
+            <h1 className="font-bold text-xs text-gray-300">
+              ({getProperDate()} 🔥)
+            </h1>
+          </div>
+          <div>
+            <a href="/fixtures/live">
+              <div className="flex space-x-1 bg-gray-900 rounded-xl p-2 animate__animated animate__flash">
+                <Image
+                  src={live}
+                  alt="soccer_team"
+                  height={1000}
+                  width={50}
+                  className="w-4 h-4"
+                  priority={true}
+                />
+                <p className="text-xs font-bold">Live</p>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
       <div className="rounded-xl w-full max-h-screen overflow-scroll mt-3 bg-gray-800">
@@ -95,7 +115,9 @@ function getOrdinalSuffix(number) {
                             className="w-8 h-8"
                             priority={true}
                           />
-                          <h1 className="text-xs md:mt-1 text-center p-2 font-bold">{match.localteam}</h1>
+                          <h1 className="text-xs md:mt-1 text-center p-2 font-bold">
+                            {match.localteam}
+                          </h1>
                         </div>
                         <div className="w-1/3 flex justify-center items-center">
                           <h1>vs</h1>
@@ -109,7 +131,9 @@ function getOrdinalSuffix(number) {
                             className="w-8 h-8"
                             priority={true}
                           />
-                          <h1 className="text-xs md:mt-1 text-center p-2 font-bold">{match.visitorteam}</h1>
+                          <h1 className="text-xs md:mt-1 text-center p-2 font-bold">
+                            {match.visitorteam}
+                          </h1>
                         </div>
                       </div>
                     </div>
