@@ -2,12 +2,10 @@
 import Image from "next/image";
 import live from "../assets/live.svg";
 import React, { useState, useEffect } from "react";
-
 import { isValid } from "date-fns";
 
 export default function FixturesComponent() {
   const [data, setData] = useState(null);
-  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     fetchData();
