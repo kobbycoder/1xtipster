@@ -1,40 +1,43 @@
 "use client";
+import io from "socket.io-client";
 import React, { useState, useEffect } from "react";
-import { isValid } from "date-fns";
+import live from "../assets/live.svg";
 import Image from "next/image";
 
 export default function LiveComponent() {
   const [data, setData] = useState(null);
+  const [liveScoreData, setLiveScoreData] = useState({});
 
   useEffect(() => {
-    fetchData();
+    const socket = io("http://localhost:3000");
+
+    // Handle incoming socket.io messages
+    socket.on("liveScoreUpdate", (data) => {
+      fetchData(data);
+      setLiveScoreData(data);
+    });
+
+    // Handle socket.io disconnection
+    socket.on("disconnect", () => {
+      console.log("WebSocket connection closed");
+    });
+
+    // Cleanup function to close the socket.io connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
-  const fetchData = async () => {
-    const newDate = new Date();
-    if (isValid(newDate)) {
-      var items = [];
-      const formattedDate = new Intl.DateTimeFormat("en-US").format(newDate);
-      const parts = formattedDate.split("/");
-      const day = parts[1];
-      const month = parts[0].padStart(2, "0"); // Add leading zero if month is a single digit
-      const year = parts[2];
-      const rearrangedDate = `${day}/${month}/${year}`;
-      const response = await fetch(
-        `/api2/fixtures/feed_livenow.json?lang=gh`
-      );
-      const data = await response.json();
+  const fetchData = async (data) => {
+    var items = [];
 
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index].country;
-        const leagues = data[index].leagues;
-        for (let i = 0; i < leagues.length; i++) {
-          const data = leagues[i];
-          items.push({country:element, ...data });
-        }
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index].country;
+      const leagues = data[index].leagues;
+      for (let i = 0; i < leagues.length; i++) {
+        const data = leagues[i];
+        items.push({ country: element, ...data });
       }
-    } else {
-      console.log("Invalid date");
     }
     setData([...items]);
   };
@@ -61,7 +64,17 @@ export default function LiveComponent() {
     <>
       <div className="rounded-xl w-full bg-gray-800">
         <div className="px-4 py-2 flex justify-between items-center">
-          <h1 className="font-bold text-xs text-gray-300">Live Matches ⚽</h1>
+          <div className="flex space-x-1">
+            <Image
+              src={live}
+              alt="soccer_team"
+              height={1000}
+              width={50}
+              className="w-4 h-4"
+              priority={true}
+            />
+            <h1 className="font-bold text-xs text-gray-300">Live Matches ⚽</h1>
+          </div>
           <h1 className="font-bold text-xs text-gray-300">
             {getProperDate()} 🔥
           </h1>
@@ -100,8 +113,11 @@ export default function LiveComponent() {
                             {match.localteam}
                           </h1>
                         </div>
-                        <div className="w-1/3 flex justify-center items-center">
-                          <h1 className="text-teal-500 font-bold">{match.status}'</h1>
+                        <div className="w-1/3 flex flex-col justify-center items-center space-y-2">
+                          <h1 className="text-teal-500 font-bold text-xs">
+                            {match.status}'
+                          </h1>
+                          <h1>{match.scoretime}</h1>
                         </div>
                         <div className="flex flex-col justify-center items-center w-1/3">
                           <Image
