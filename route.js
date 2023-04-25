@@ -1,11 +1,12 @@
-const http = require('http');
+const { createServer } = require('http');
 const { parse } = require('url');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const io = require('socket.io');
+const { Server } = require('socket.io');
+const next = require('next');
 
 const dev = process.env.NODE_ENV !== "production";
-const next = require('next')({ dev }); 
-const handle = next.getRequestHandler();
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
 const apiProxyProbet = createProxyMiddleware("/api", {
   target: "https://probet.tips",
@@ -25,8 +26,8 @@ const apiProxyExtra = createProxyMiddleware("/api3", {
   pathRewrite: { "^/api3": "/sportus/webservice" },
 });
 
-next.prepare().then(() => {
-  const server = http.createServer((req, res) => {
+app.prepare().then(() => {
+  const server = createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
@@ -44,17 +45,20 @@ next.prepare().then(() => {
   });
 
   // Create a new WebSocket server
-  const websocketServer = io(server);
+  const websocketServer = new Server(server);
 
   websocketServer.on("connection", (socket) => {
     console.log("WebSocket connection established");
 
     // Send live score updates to the client every 5 seconds
-    setInterval(() => {
-      const liveFeedData = fetch('https://static.holoduke.nl/footapi/fixtures/feed_livenow.json?lang=gh')
-      .then(response => response.json())
-      .then(data => socket.emit('liveScoreUpdate', data))
-      .catch(error => console.error(error));
+    setInterval(async () => {
+      try {
+        const response = await fetch('https://static.holoduke.nl/footapi/fixtures/feed_livenow.json?lang=gh');
+        const data = await response.json();
+        socket.emit('liveScoreUpdate', data);
+      } catch (error) {
+        console.error(error);
+      }
     }, 5000);
 
     // Handle WebSocket disconnection
