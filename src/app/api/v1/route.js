@@ -5,8 +5,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const io = require('socket.io');
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const nextApp = next({ dev });
+const handle = nextApp.getRequestHandler();
 
 const apiProxyProbet = createProxyMiddleware("/api", {
   target: "https://probet.tips",
@@ -26,7 +26,7 @@ const apiProxyExtra = createProxyMiddleware("/api3", {
   pathRewrite: { "^/api3": "/sportus/webservice" },
 });
 
-app.prepare().then(() => {
+nextApp.prepare().then(() => {
   const server = http.createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
