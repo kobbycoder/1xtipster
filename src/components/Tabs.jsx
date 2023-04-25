@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { startOfToday, subDays, addDays, format } from 'date-fns';
+import { analytics } from "@/lib/firebase";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,6 +59,7 @@ function MyTabPanel({ date }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    analytics;
     fetchData();
   }, [date]);
 
