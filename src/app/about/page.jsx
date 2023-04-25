@@ -5,7 +5,7 @@ export default function page() {
   return (
     <div className="flex w-full h-full justify-between">
       <div className="hidden lg:flex w-2/6">
-        <AffiliateAdPlacement collection="Ads" id="2" />
+        <AffiliateAdPlacement collection="Ads" id="4" />
       </div>
 
       <div className="w-full p-6 lg:p-0 lg:pt-6 md:pt-6 text-gray-400">
@@ -30,7 +30,7 @@ export default function page() {
           <p>
             Check out our free football tips page for yourself{" "}
             <span className="underline italic">
-              <a href="/free.bets">Free bet tips</a>
+              <a href="/analysis">Free bet tips</a>
             </span>{" "}
             ⚽.
           </p>

@@ -1,7 +1,5 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import xbet from "../assets/xbet.png";
-import Image from "next/image";
 
 export default function TipsDialog({
   open,

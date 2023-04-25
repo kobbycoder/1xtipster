@@ -9,7 +9,7 @@ export default function page({ params }) {
   return (
     <div className="flex w-full min-h-screen justify-between">
       <div className="hidden lg:flex w-2/6">
-        <AffiliateAdPlacement collection="Ads" id="2" />
+        <AffiliateAdPlacement collection="Ads" id="4" />
       </div>
 
       <div className="w-full p-6 lg:p-0 lg:pt-6 md:pt-6">

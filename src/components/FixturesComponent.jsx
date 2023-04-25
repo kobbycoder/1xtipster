@@ -117,8 +117,9 @@ export default function FixturesComponent() {
                             {match.localteam}
                           </h1>
                         </div>
-                        <div className="w-1/3 flex justify-center items-center">
+                        <div className="w-1/3 flex flex-col justify-center items-center space-y-2">
                           <h1>vs</h1>
+                          <h1 className="text-xs">{match.time}</h1>
                         </div>
                         <div className="flex flex-col justify-center items-center w-1/3">
                           <Image

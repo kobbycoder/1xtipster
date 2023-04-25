@@ -20,6 +20,12 @@ const apiProxyHoloduke = createProxyMiddleware("/api2", {
   pathRewrite: { "^/api2": "/footapi" },
 });
 
+const apiProxyExtra = createProxyMiddleware("/api3", {
+  target: "http://extrawebservice.com",
+  changeOrigin: true,
+  pathRewrite: { "^/api3": "/sportus/webservice" },
+});
+
 app.prepare().then(() => {
   const server = http.createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
@@ -28,6 +34,8 @@ app.prepare().then(() => {
     if (pathname.startsWith("/api")) {
       if (pathname.startsWith("/api2")) {
         apiProxyHoloduke(req, res);
+      } else if (pathname.startsWith("/api3")) {
+        apiProxyExtra(req, res);
       } else {
         apiProxyProbet(req, res);
       }
