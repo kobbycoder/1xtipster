@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev && next proxy",
-    "build": "next build && jsc --project jsconfig.server.json",
+    "build": "next build && tsc --project jsconfig.server.json",
     "start": "cross-env NODE_ENV=production node route.js",
     "lint": "next lint",
     "proxy": "node route.js"
