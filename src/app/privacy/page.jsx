@@ -76,7 +76,7 @@ export default function page() {
             browser settings.
           </p>
 
-          <h1 className="font-bold">Children's Privacy</h1>
+          <h1 className="font-bold">Children&apos;s Privacy</h1>
           <p>
             Our website is not intended for use by children under the age of 18.
             We do not knowingly collect personal information from children under
@@ -102,7 +102,7 @@ export default function page() {
       </div>
 
       <div className="hidden lg:flex w-2/6">
-        <AffiliateAdPlacement collection="Ads" id="2" />
+        <AffiliateAdPlacement collection="Ads" id="4" />
       </div>
     </div>
   );

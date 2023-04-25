@@ -115,7 +115,7 @@ export default function LiveComponent() {
                         </div>
                         <div className="w-1/3 flex flex-col justify-center items-center space-y-2">
                           <h1 className="text-teal-500 font-bold text-xs">
-                            {match.status}'
+                            {match.status}&apos;
                           </h1>
                           <h1>{match.scoretime}</h1>
                         </div>

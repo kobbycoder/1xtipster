@@ -35,15 +35,15 @@ export default function page() {
             ⚽.
           </p>
           <p>
-            At 1xtipsters, we live and breathe sports. We know that there's
+            At 1xtipsters, we live and breathe sports. We know that there&apos;s
             nothing quite like the thrill of a good match or the excitement of
-            placing a winning bet. That's why we're dedicated to providing our
-            users with the best possible betting experience, whether you're a
+            placing a winning bet. That&apos;s why we&apos;re dedicated to providing our
+            users with the best possible betting experience, whether you&apos;re a
             seasoned punter or a beginner.
           </p>
           <p>
             We feature top value bets from leagues and sports across the world,
-            so no matter what your preferences are, we've got you covered. We
+            so no matter what your preferences are, we&apos;ve got you covered. We
             cover football, basketball, tennis, cricket, horse racing, and many
             more.
           </p>
@@ -54,7 +54,7 @@ export default function page() {
             with 1xtipster.com. We are committed to providing you with the best
             betting tips and experience, and we are confident that you will
             enjoy our services. If you have any questions or concerns, please
-            don't hesitate to contact us. Thank you for choosing 1xtipster.com.
+            don&apos;t hesitate to contact us. Thank you for choosing 1xtipster.com.
           </p>
         </div>
       </div>

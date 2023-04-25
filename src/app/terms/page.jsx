@@ -18,10 +18,10 @@ function page() {
         <div className="space-y-4 bg-gray-800 p-4">
           <h1 className="font-bold">INTRODUCTION</h1>
           <p>
-            These terms and conditions (the "Agreement") govern your use of the
-            1xtipster.com website (the "Site") and the services provided through
+            These terms and conditions (the &lsquo;Agreement&rsquo;) govern your use of the
+            1xtipster.com website (the &lsquo;Site&rsquo;) and the services provided through
             the Site, which includes free betting tips and other related content
-            (the "Services"). By accessing or using the Site or Services, you
+            (the &lsquo;Services&rsquo;). By accessing or using the Site or Services, you
             agree to be bound by this Agreement. If you do not agree to this
             Agreement, do not access or use the Site or Services.
           </p>
@@ -60,7 +60,7 @@ function page() {
           <p>
             You are solely responsible for any content that you upload, post,
             email, transmit, or otherwise make available through the Site or
-            Services ("User Content"). You represent and warrant that you own or
+            Services (&lsquo;User Content&rsquo;). You represent and warrant that you own or
             have the necessary licenses, rights, consents, and permissions to
             use and authorize 1xtipster.com to use all patent, trademark, trade
             secret, copyright, or other proprietary rights in and to any and all
@@ -72,7 +72,7 @@ function page() {
               non-exclusive, royalty-free, sublicensable, and transferable
               license to use, reproduce, distribute, prepare derivative works
               of, display, and perform the User Content in connection with the
-              Site and 1xtipster.com's (and its successors' and affiliates')
+              Site and 1xtipster.com&apos;s (and its successors&apos; and affiliates&apos;)
               business, including without limitation for promoting and
               redistributing part or all of the Site and Services (and
               derivative works thereof) in any media formats and through any
@@ -82,7 +82,7 @@ function page() {
 
           <h1 className="font-bold">DISCLAIMER OF WARRANTIES</h1>
           <p>
-          1xtipster.com provides the Site and Services on an "as is" and "as available" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the Site or Services or the information, content, materials, or products included on the Site or provided through the Services. You expressly agree that your use of the Site and Services is at your sole risk.
+          1xtipster.com provides the Site and Services on an &lsquo;as is&rsquo; and &lsquo;as available&rsquo; basis. We make no representations or warranties of any kind, express or implied, as to the operation of the Site or Services or the information, content, materials, or products included on the Site or provided through the Services. You expressly agree that your use of the Site and Services is at your sole risk.
           </p>
 
           <h1 className="font-bold">LIMITATION OF LIABILITY</h1>
