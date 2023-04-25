@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev && next proxy",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && jsc --project jsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node route.js",
     "lint": "next lint",
     "proxy": "node route.js"
   },
@@ -15,6 +15,7 @@
     "animate.css": "^4.1.1",
     "autoprefixer": "10.4.14",
     "bufferutil": "^4.0.7",
+    "cross-env": "^7.0.3",
     "daisyui": "^2.51.5",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
