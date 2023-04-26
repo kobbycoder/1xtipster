@@ -64,7 +64,7 @@ function MyTabPanel({ date }) {
   }, [date]);
 
   const fetchData = async () => {
-    const response = await fetch(`/api/predictions?date=${date}`);
+    const response = await fetch(`https://probet.tips/api/predictions?date=${date}`);
     const data = await response.json();
     setData(data);
   };
