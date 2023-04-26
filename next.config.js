@@ -9,6 +9,7 @@ const nextConfig = {
   'static.wikia.nocookie.net', 'sortitoutsi.net'
   ],
   },
+  distDir: 'public',
 }
 
 module.exports = nextConfig
