@@ -12,7 +12,7 @@ export default function AnalysisComponent() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(`https://1xtipster.com/api3/load_home_soccer.php`);
+    const response = await fetch(`/api3/load_home_soccer.php`);
     const data = await response.json();
 
     setData(data.game_list);

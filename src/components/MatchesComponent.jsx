@@ -22,7 +22,7 @@ export default function MatchesComponent({ date, id }) {
     const newDate = new Date(date);
     if (isValid(newDate)) {
       const formattedDate = new Intl.DateTimeFormat("en-US").format(newDate);
-      const response = await fetch(`https://1xtipster.com/api/predictions?date=${formattedDate}`);
+      const response = await fetch(`/api/predictions?date=${formattedDate}`);
       const data = await response.json();
       const targetObject = data.find((obj) => obj.id === parseInt(id));
       setLeagueName(targetObject.name);

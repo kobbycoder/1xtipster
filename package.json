@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "node server.js",
-  "build": "next build",
-  "start": "NODE_ENV=production node server.js"
-},
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "animate.css": "^4.1.1",
     "autoprefixer": "10.4.14",
     "bufferutil": "^4.0.7",
-    "cross-env": "^7.0.3",
     "daisyui": "^2.51.5",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
