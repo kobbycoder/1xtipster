@@ -9,7 +9,7 @@ export default function LiveComponent() {
   const [liveScoreData, setLiveScoreData] = useState({});
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://1xtipster.com");
 
     // Handle incoming socket.io messages
     socket.on("liveScoreUpdate", (data) => {

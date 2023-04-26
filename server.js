@@ -5,8 +5,9 @@ const { Server } = require('socket.io');
 const next = require('next');
 
 const port = parseInt(process.env.PORT || '3000', 10)
+const hostname = process.env.NODE_ENV !== "production" ? 'localhost' : '1xtipster.com'
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
 const apiProxyProbet = createProxyMiddleware("/api", {

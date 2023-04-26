@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev && next proxy",
-    "build": "next build && tsc --project jsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node route.js",
-    "lint": "next lint",
-    "proxy": "node route.js"
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
