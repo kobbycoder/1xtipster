@@ -12,7 +12,7 @@ export default function DetailAnalysis({ id }) {
     const formData = new URLSearchParams();
     formData.append("event_id", id);
 
-    await fetch("/api3/soccer_game_details.php", {
+    await fetch("https://1xtipster.com/api3/soccer_game_details.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

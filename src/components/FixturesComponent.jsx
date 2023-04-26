@@ -22,7 +22,7 @@ export default function FixturesComponent() {
       const year = parts[2];
       const rearrangedDate = `${day}/${month}/${year}`;
       const response = await fetch(
-        `/api2/fixtures/feed_matches_aggregated_short.json?lang=gh&date=${rearrangedDate}&tzoffset=0`
+        `https://1xtipster.com/api2/fixtures/feed_matches_aggregated_short.json?lang=gh&date=${rearrangedDate}&tzoffset=0`
       );
       const data = await response.json();
 
