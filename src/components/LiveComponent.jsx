@@ -1,45 +1,35 @@
 "use client";
-import io from "socket.io-client";
 import React, { useState, useEffect } from "react";
-import live from "../assets/live.svg";
+import liveIcon from "../assets/live.svg";
 import Image from "next/image";
+import getLive from "@/lib/utils/getLive";
+import io from 'socket.io-client'
+let socket
 
 export default function LiveComponent() {
   const [data, setData] = useState(null);
-  const [liveScoreData, setLiveScoreData] = useState({});
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
-
-    // Handle incoming socket.io messages
-    socket.on("liveScoreUpdate", (data) => {
-      fetchData(data);
-      setLiveScoreData(data);
-    });
-
-    // Handle socket.io disconnection
-    socket.on("disconnect", () => {
-      console.log("WebSocket connection closed");
-    });
-
-    // Cleanup function to close the socket.io connection when the component unmounts
-    return () => {
-      socket.disconnect();
-    };
+    fetchData();
   }, []);
 
-  const fetchData = async (data) => {
+  const fetchData = async () => {
     var items = [];
 
-    for (let index = 0; index < data.length; index++) {
-      const element = data[index].country;
-      const leagues = data[index].leagues;
-      for (let i = 0; i < leagues.length; i++) {
-        const data = leagues[i];
-        items.push({ country: element, ...data });
+    getLive().then((res) => {
+      const data = res.data;
+
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index].country;
+        const leagues = data[index].leagues;
+        for (let i = 0; i < leagues.length; i++) {
+          const data = leagues[i];
+          items.push({ country: element, ...data });
+        }
       }
-    }
-    setData([...items]);
+      setData([...items]);
+    });
+
   };
 
   // Function to get the ordinal suffix of a number
@@ -66,7 +56,7 @@ export default function LiveComponent() {
         <div className="px-4 py-2 flex justify-between items-center">
           <div className="flex space-x-1">
             <Image
-              src={live}
+              src={liveIcon}
               alt="soccer_team"
               height={1000}
               width={50}

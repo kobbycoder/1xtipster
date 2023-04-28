@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { isValid } from "date-fns";
+import getData from "@/lib/utils/getData";
 import TipsDialog from "./TipsDialog";
 import Image from "next/image";
 
@@ -15,18 +16,18 @@ export default function MatchesComponent({ date, id }) {
   let [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    fetchData(date);
-  }, [date]);
+    fetchData(date, id);
+  }, [date, id]);
 
-  const fetchData = async (date) => {
+  const fetchData = async (date, id) => {
     const newDate = new Date(date);
     if (isValid(newDate)) {
       const formattedDate = new Intl.DateTimeFormat("en-US").format(newDate);
-      const response = await fetch(`https://probet.tips/api/predictions?date=${formattedDate}`);
-      const data = await response.json();
-      const targetObject = data.find((obj) => obj.id === parseInt(id));
-      setLeagueName(targetObject.name);
-      setData(targetObject.matches);
+      getData(formattedDate).then((res) => {
+        const targetObject = res.data.find((obj) => obj.id === parseInt(id));
+        setLeagueName(targetObject.name);
+        setData(targetObject.matches);
+      });
     } else {
       console.log("Invalid date");
     }

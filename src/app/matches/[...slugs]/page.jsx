@@ -3,8 +3,8 @@ import AffiliateAdPlacement from "@/components/AffiliateAdPlacement";
 import MatchesComponent from "@/components/MatchesComponent";
 
 export default function page({ params }) {
-  const date = params.slug[0];
-  const id = params.slug[1];
+  const date = params.slugs[0];
+  const id = params.slugs[1];
 
   return (
     <div className="flex w-full min-h-screen justify-between">

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import getAnalysis from "@/lib/utils/getAnalysis";
+import Link from "next/link";
 
 export default function AnalysisComponent() {
   const [data, setData] = useState(null);
@@ -12,10 +12,9 @@ export default function AnalysisComponent() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(`/api3/load_home_soccer.php`);
-    const data = await response.json();
-
-    setData(data.game_list);
+    getAnalysis().then((res) => {
+      setData(res.data.game_list);
+    })
   };
   // Function to get the ordinal suffix of a number
   function getOrdinalSuffix(number) {

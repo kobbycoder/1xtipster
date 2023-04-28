@@ -3,6 +3,7 @@ import Image from "next/image";
 import live from "../assets/live.svg";
 import React, { useState, useEffect } from "react";
 import { isValid } from "date-fns";
+import getFixtures from "@/lib/utils/getFixtures";
 
 export default function FixturesComponent() {
   const [data, setData] = useState(null);
@@ -21,22 +22,20 @@ export default function FixturesComponent() {
       const month = parts[0].padStart(2, "0"); // Add leading zero if month is a single digit
       const year = parts[2];
       const rearrangedDate = `${day}/${month}/${year}`;
-      const response = await fetch(
-        `/api2/fixtures/feed_matches_aggregated_short.json?lang=gh&date=${rearrangedDate}&tzoffset=0`
-      );
-      const data = await response.json();
-
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index].leagues;
-        for (let i = 0; i < element.length; i++) {
-          const data = element[i];
-          items.push({ ...data });
+      getFixtures(rearrangedDate).then((res) => {
+        const data = res.data;
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index].leagues;
+          for (let i = 0; i < element.length; i++) {
+            const data = element[i];
+            items.push({ ...data });
+          }
         }
-      }
+        setData([...items]);
+      });
     } else {
       console.log("Invalid date");
     }
-    setData([...items]);
   };
 
   // Function to get the ordinal suffix of a number

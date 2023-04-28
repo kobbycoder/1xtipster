@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import getDetails from "@/lib/utils/getDetails";
 
 export default function DetailAnalysis({ id }) {
   const [data, setData] = useState(null);
@@ -9,26 +10,9 @@ export default function DetailAnalysis({ id }) {
   }, [id]);
 
   const fetchData = async (id) => {
-    const formData = new URLSearchParams();
-    formData.append("event_id", id);
-
-    await fetch("/api3/soccer_game_details.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: formData.toString(),
+    getDetails(id).then((data) => {
+      setData(data.data);
     })
-      .then((response) => {
-        // Handle the response
-        response.json().then((res) => {
-          setData(res);
-        });
-      })
-      .catch((error) => {
-        // Handle the error
-        console.log(error);
-      });
   };
 
   // Function to get the ordinal suffix of a number
