@@ -1,16 +1,29 @@
-"use client"
+"use client";
 import Image from "next/image";
-import logo from '../assets/logo.png'
-import crown from '../assets/crown.svg'
+import logo from "../assets/logo.png";
+import crown from "../assets/crown.svg";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, GiftIcon } from "@heroicons/react/24/outline";
-import { useSelectedLayoutSegment } from "next/navigation"
+import { useSelectedLayoutSegment } from "next/navigation";
 
 const navigation = [
   { name: "Home 🏠", href: "/", targetSegment: null },
-  { name: "Fixtures ⚽", href: "/fixtures", targetSegment: 'fixtures' },
-  { name: "Analysis 📊", href: "/analysis", targetSegment: 'analysis' },
-  { name: "VIP", href: "/vip", targetSegment: 'vip', icon: <Image className="block h-6 w-6 mr-2" src={crown} width={1000} height={50} alt='crown' /> },
+  { name: "Fixtures ⚽", href: "/fixtures", targetSegment: "fixtures" },
+  { name: "Analysis 📊", href: "/analysis", targetSegment: "analysis" },
+  {
+    name: "VIP",
+    href: "/vip",
+    targetSegment: "vip",
+    icon: (
+      <Image
+        className="block h-6 w-6 mr-2"
+        src={crown}
+        width={1000}
+        height={50}
+        alt="crown"
+      />
+    ),
+  },
 ];
 
 function classNames(...classes) {
@@ -39,22 +52,26 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-end sm:items-stretch pr-8 sm:pr-0 sm:justify-between sm:mx-4">
                 <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-8 w-auto lg:hidden"
-                    src={logo}
-                    alt="Your Company"
-                    width={1000}
-                    height={50}
-                    priority
-                  />
-                  <Image
-                    className="hidden h-8 w-auto lg:block"
-                    src={logo}
-                    alt="Your Company"
-                    width={1000}
-                    height={50}
-                    priority
-                  />
+                  <a href="/">
+                    <Image
+                      className="block h-8 w-auto lg:hidden"
+                      src={logo}
+                      alt="Your Company"
+                      width={1000}
+                      height={50}
+                      priority
+                    />
+                  </a>
+                  <a href="/">
+                    <Image
+                      className="hidden h-8 w-auto lg:block"
+                      src={logo}
+                      alt="Your Company"
+                      width={1000}
+                      height={50}
+                      priority
+                    />
+                  </a>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -63,21 +80,20 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          activeSegment === item.targetSegment 
+                          activeSegment === item.targetSegment
                             ? "bg-gray-900 text-white"
                             : "text-gray-400 hover:bg-gray-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium flex items-center"
                         )}
                         aria-current={item.current ? "page" : undefined}
-                      > 
-                        {item.icon ? item.icon : ''}
+                      >
+                        {item.icon ? item.icon : ""}
                         {item.name}
                       </a>
                     ))}
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
