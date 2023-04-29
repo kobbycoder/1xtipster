@@ -8,6 +8,7 @@ const nextConfig = {
   'www.stadebriochin.com', 'e7.pngegg.com', 'www.rainbow-sports.com', 'as01.epimg.net', 'static.holoduke.nl', 'www.gudjaunitedfc.com', 'seeklogo.com',
   'static.wikia.nocookie.net', 'sortitoutsi.net', 'www.stickpng.com'
   ],
+  unoptimized: true,
   },
 }
 
