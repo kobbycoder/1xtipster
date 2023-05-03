@@ -17,11 +17,14 @@ export default function FixturesComponent() {
     if (isValid(newDate)) {
       var items = [];
       const formattedDate = new Intl.DateTimeFormat("en-US").format(newDate);
-      const parts = formattedDate.split("/");
-      const day = parts[1];
-      const month = parts[0].padStart(2, "0"); // Add leading zero if month is a single digit
-      const year = parts[2];
-      const rearrangedDate = `${day}/${month}/${year}`;
+      const dateParts = formattedDate.split("/");
+      const date = new Date(dateParts[2], dateParts[0] - 1, dateParts[1]);
+      const rearrangedDate = date.toLocaleDateString(undefined, {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+
       getFixtures(rearrangedDate).then((res) => {
         const data = res.data;
         for (let index = 0; index < data.length; index++) {
